@@ -48,7 +48,7 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238fbfa4' stroke-opacity='0.05'%3E%3Cpath d='M0 80c40-40 80-40 160 0M0 40c40-40 80-40 160 0M0 120c40-40 80-40 160 0'/%3E%3C/g%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238fbfa4' stroke-opacity='0.05'%3E%3Cpath d='M0 80c[...]
   opacity: 0.7;
   z-index: 0;
 }
@@ -562,6 +562,7 @@ button.nav-cta.ghost {
   margin: 0 auto;
   padding: 4rem 1.25rem 2rem;
   animation: rise 0.7s ease both;
+  overflow: hidden;
 }
 
 .guide-title {
@@ -646,6 +647,9 @@ button.nav-cta.ghost {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .species-switcher a {
@@ -654,12 +658,55 @@ button.nav-cta.ghost {
   border: 1px solid var(--line);
   color: var(--fern);
   transition: background 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
 }
 
 .species-switcher a:hover,
 .species-switcher a.active {
   background: rgba(61, 143, 99, 0.25);
   color: var(--cream);
+}
+
+.species-switcher-visual {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.species-switcher-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  transition: opacity 0.25s ease;
+}
+
+.species-switcher-item:hover {
+  opacity: 0.8;
+}
+
+.species-switcher-image {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  border-radius: 0.8rem;
+  border: 1.5px solid var(--line);
+  overflow: hidden;
+  background: rgba(16, 38, 26, 0.5);
+}
+
+.species-switcher-image img {
+  object-fit: cover;
+}
+
+.species-switcher-label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--fern);
+  max-width: 90px;
+  word-break: break-word;
 }
 
 .species-guides {
