@@ -139,10 +139,18 @@ export default async function ReptileGuidePage({ params }: Props) {
             ))}
           </div>
           {species.length ? (
-            <div className="species-switcher">
+            <div className="species-switcher-visual">
               {species.map((entry) => (
-                <Link key={entry.slug} href={`#${entry.slug}`}>
-                  {entry.name}
+                <Link key={entry.slug} href={`#${entry.slug}`} className="species-switcher-item">
+                  <div className="species-switcher-image">
+                    <Image
+                      src={entry.image}
+                      alt={entry.imageAlt}
+                      fill
+                      sizes="60px"
+                    />
+                  </div>
+                  <span className="species-switcher-label">{entry.name}</span>
                 </Link>
               ))}
             </div>
