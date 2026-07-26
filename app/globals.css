@@ -662,6 +662,32 @@ button.nav-cta.ghost {
   color: var(--cream);
 }
 
+.species-guides {
+  display: grid;
+  gap: 2rem;
+}
+
+.species-guide {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background: rgba(16, 38, 26, 0.55);
+  scroll-margin-top: 6rem;
+}
+
+.species-guide-media {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.species-guide-media img {
+  object-fit: cover;
+}
+
 /* AUTH */
 .auth-shell {
   max-width: 480px;

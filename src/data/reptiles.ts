@@ -4,15 +4,13 @@ export type CareSection = {
   bullets?: string[];
 };
 
-export type Reptile = {
-  slug: string;
-  name: string;
-  scientificHint: string;
-  tagline: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-  accent: string;
+export type ScheduleDefaults = {
+  feeding: string;
+  watering: string;
+  cleaning: string;
+};
+
+export type CareGuide = {
   humidity: string;
   tempRange: string;
   diet: CareSection;
@@ -23,12 +21,1142 @@ export type Reptile = {
   substrate: CareSection;
   substitutes: CareSection;
   healthRiskSigns: string[];
-  scheduleDefaults: {
-    feeding: string;
-    watering: string;
-    cleaning: string;
-  };
+  scheduleDefaults: ScheduleDefaults;
 };
+
+export type ReptileSpecies = CareGuide & {
+  slug: string;
+  name: string;
+  scientificHint: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+};
+
+export type Reptile = CareGuide & {
+  slug: string;
+  name: string;
+  scientificHint: string;
+  tagline: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  accent: string;
+  species?: ReptileSpecies[];
+};
+
+const geckoSpecies: ReptileSpecies[] = [
+  {
+    slug: "gargoyle-gecko",
+    name: "Gargoyle Gecko",
+    scientificHint: "Rhacodactylus auriculatus",
+    description:
+      "Gargoyle geckos are hardy New Caledonian climbers that thrive in tall, planted enclosures with moderate humidity swings.",
+    image: "/reptiles/geckos/gargoyle-gecko.svg",
+    imageAlt: "Gargoyle gecko placeholder",
+    humidity: "60–80% with dry daytime period",
+    tempRange: "Day 72–78°F · Night 68–72°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Feed a complete gecko diet (CGD) and occasional insects for enrichment and protein balance.",
+      bullets: [
+        "CGD 3–4 nights weekly",
+        "Dubia or crickets 1–2 times weekly",
+        "Calcium dust feeders and remove uneaten insects overnight",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Most health issues stem from dehydration, low calcium, or unsanitary décor.",
+      bullets: [
+        "Metabolic bone disease from poor UVB/calcium coverage",
+        "Stuck shed around toes and tail tip",
+        "Mouth rot in damp, dirty enclosures",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "Prioritize vertical climbing routes, cork bark, and dense cover to reduce stress.",
+      bullets: [
+        "Single adult: 18×18×24 in minimum",
+        "Branches, cork rounds, and plant cover across all heights",
+        "Ventilation plus secure climbing surfaces",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "Gargoyles do best under a gentle day/night cycle with mild UVB exposure.",
+      bullets: [
+        "12-hour light cycle",
+        "Low-output UVB (2–5%) across part of the enclosure",
+        "Avoid basking spots hotter than 82°F",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Mist in the evening, allow partial dry-out by daytime, and monitor with a digital hygrometer.",
+      bullets: [
+        "Night spike: 75–80%",
+        "Daytime target: 55–65%",
+        "Increase airflow if condensation persists",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Moisture-retentive but airy substrates support hydration and healthy microfauna.",
+      bullets: [
+        "Coco fiber or bioactive tropical mix",
+        "Leaf litter and sphagnum for humidity pockets",
+        "Paper towel for quarantine",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Use temporary solutions only during travel, outages, or quarantine.",
+      bullets: [
+        "Travel tub with cork hide and ventilation",
+        "Hand misting if automatic system fails",
+        "Emergency CGD brand swap for short-term feeding",
+      ],
+    },
+    healthRiskSigns: [
+      "Wrinkled skin or sunken eyes",
+      "Persistent stuck shed",
+      "Rapid weight loss or weak grip",
+      "Jaw softness or tremors",
+    ],
+    scheduleDefaults: {
+      feeding: "CGD every other night; insects once or twice weekly",
+      watering: "Mist nightly and refresh water cup daily",
+      cleaning: "Spot clean daily; full enclosure refresh every 2–4 weeks",
+    },
+  },
+  {
+    slug: "crested-gecko",
+    name: "Crested Gecko",
+    scientificHint: "Correlophus ciliatus",
+    description:
+      "Crested geckos are arboreal geckos that rely on stable room temperatures, vertical cover, and routine misting.",
+    image: "/reptiles/geckos/crested-gecko.svg",
+    imageAlt: "Crested gecko placeholder",
+    humidity: "55–80% with nightly peak",
+    tempRange: "Day 72–78°F · Night 68–72°F",
+    diet: {
+      title: "Diet",
+      content:
+        "A high-quality CGD is the staple, with feeder insects as optional enrichment.",
+      bullets: [
+        "CGD 3–5 nights weekly based on age",
+        "Crickets or roaches weekly for enrichment",
+        "Offer fresh water in elevated cup",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Cresteds often show illness first through appetite changes and climbing weakness.",
+      bullets: [
+        "MBD linked to low calcium or UVB",
+        "Tail injuries from falls or handling",
+        "Dehydration during low-humidity periods",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "Tall enclosure design with visual cover keeps cresteds active and stress low.",
+      bullets: [
+        "Single adult: 18×18×24 in minimum",
+        "Dense plants and horizontal perches at multiple heights",
+        "Background texture for climbing grip",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "Provide gentle daytime lighting and optional low UVB without overheating.",
+      bullets: [
+        "12-hour day/night cycle",
+        "Optional 2–5% UVB strip",
+        "Avoid enclosure temperatures above 82°F",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Aim for a nighttime rise and daytime drop to prevent respiratory issues.",
+      bullets: [
+        "Night: 70–80%",
+        "Day: 55–65%",
+        "Allow brief dry period between mists",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Substrates should support humidity while minimizing mold risk.",
+      bullets: [
+        "Coco husk, ABG mix, or bioactive tropical soil",
+        "Drainage layer for planted enclosures",
+        "Paper towel for juveniles in quarantine",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Emergency options should preserve hydration and safe climbing.",
+      bullets: [
+        "Temporary tub with fake foliage and paper towel",
+        "Hand spray bottle during mister downtime",
+        "Alternative CGD formulas until preferred brand returns",
+      ],
+    },
+    healthRiskSigns: [
+      "Weight drop and reduced tongue-feeding",
+      "Weak grip or frequent slips",
+      "Sunken eyes and tacky saliva",
+      "Stuck shed on toe pads",
+    ],
+    scheduleDefaults: {
+      feeding: "Juveniles CGD daily; adults every other day, plus insects weekly",
+      watering: "Mist evening and provide fresh water daily",
+      cleaning: "Spot clean daily; sanitize décor monthly",
+    },
+  },
+  {
+    slug: "leopard-gecko",
+    name: "Leopard Gecko",
+    scientificHint: "Eublepharis macularius",
+    description:
+      "Leopard geckos are terrestrial geckos that need dry ambient air, a warm hide, and a moist hide for shedding support.",
+    image: "/reptiles/geckos/leopard-gecko.svg",
+    imageAlt: "Leopard gecko placeholder",
+    humidity: "30–40% ambient + humid hide",
+    tempRange: "Warm hide 88–92°F · Cool side 72–78°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Leopard geckos are insectivores that require gut-loaded feeders and scheduled supplementation.",
+      bullets: [
+        "Staple feeders: dubia roaches, crickets, silkworms",
+        "Calcium dust most feedings; multivitamin weekly",
+        "Feed juveniles daily and adults every 2–3 days",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Common preventable issues involve calcium imbalance, impaction, and retained shed.",
+      bullets: [
+        "MBD and soft jaw syndrome",
+        "Impaction from unsafe loose substrate",
+        "Retained shed causing toe loss",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "Horizontal floor space and three functional hides are key for thermal behavior.",
+      bullets: [
+        "Single adult: 36×18 in floor space minimum",
+        "Warm hide, cool hide, and dedicated humid hide",
+        "Secure slate or low climbing décor",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "Use regulated heat and optional low UVB to support metabolism without overheating.",
+      bullets: [
+        "Overhead heat source with thermostat",
+        "Optional low UVB strip for enrichment",
+        "No red or blue night bulbs",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Maintain dry ambient humidity while keeping one humid retreat available daily.",
+      bullets: [
+        "Ambient target: 30–40%",
+        "Humid hide: 70%+ with damp moss",
+        "Increase ventilation if enclosure stays damp",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Choose stable, low-risk flooring based on age and health status.",
+      bullets: [
+        "Paper towel for juveniles or medical observation",
+        "Slate tile or packed soil/sand blend for healthy adults",
+        "Avoid calcium sand and walnut shell",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Short-term alternatives can bridge outages or quarantines safely.",
+      bullets: [
+        "Plastic tub quarantine with paper substrate",
+        "Emergency feeder swaps: black soldier fly larvae or silkworms",
+        "Heat mat backup only with thermostat control",
+      ],
+    },
+    healthRiskSigns: [
+      "Tail thinning or prolonged refusal to eat",
+      "Straining stool or bloating",
+      "Retained shed around toes",
+      "Tremors or bowed limbs",
+    ],
+    scheduleDefaults: {
+      feeding: "Juveniles daily; adults every 2–3 days",
+      watering: "Fresh shallow water daily; humid hide checked daily",
+      cleaning: "Spot clean daily; full deep clean every 2–3 weeks",
+    },
+  },
+  {
+    slug: "day-gecko",
+    name: "Day Gecko",
+    scientificHint: "Phelsuma spp.",
+    description:
+      "Day geckos are fast, diurnal arboreal geckos that need bright light, UVB, and heavily planted vertical spaces.",
+    image: "/reptiles/geckos/day-gecko.svg",
+    imageAlt: "Day gecko placeholder",
+    humidity: "60–80% with airflow",
+    tempRange: "Basking 88–92°F · Ambient 75–82°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Offer varied insects plus nectar-style mixes to mirror natural feeding behavior.",
+      bullets: [
+        "Small insects dusted with calcium",
+        "Commercial gecko nectar 2–3 times weekly",
+        "Fruit puree only as occasional supplement",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Skin injuries and stress-related decline are common when handling or enclosure design is poor.",
+      bullets: [
+        "Skin tears from rough handling",
+        "MBD from low UVB and supplementation gaps",
+        "Respiratory irritation in stagnant humidity",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "A bright, tall habitat with bamboo and leaf cover supports territorial behavior.",
+      bullets: [
+        "Single adult: 18×18×24 in minimum (larger preferred)",
+        "Live plants and bamboo tubes for security",
+        "High perching bask zone with cooler lower area",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "Day geckos require strong daytime lighting and safe basking to stay active.",
+      bullets: [
+        "T5 HO UVB 5–6%",
+        "Bright visible light with 12-hour photoperiod",
+        "Basking lamp with guarded fixture",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Provide regular misting and recovery dry periods to avoid skin and lung issues.",
+      bullets: [
+        "Morning and evening misting",
+        "Maintain 60–80% with strong ventilation",
+        "Let surfaces partially dry between sessions",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Tropical moisture-retaining substrate helps plants and humidity control.",
+      bullets: [
+        "Bioactive soil with drainage layer",
+        "Coco fiber with leaf litter as non-bioactive option",
+        "Paper substrate for quarantine",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Emergency setups should prioritize warmth, humidity, and climbing security.",
+      bullets: [
+        "Travel tub with artificial plants and vertical branches",
+        "Manual misting if fogger or mister fails",
+        "Short-term feeder rotation using flies or small roaches",
+      ],
+    },
+    healthRiskSigns: [
+      "Skin abrasions or peeling",
+      "Persistent dark stress coloration",
+      "Weak grip at high perches",
+      "Sunken eyes or sticky shed",
+    ],
+    scheduleDefaults: {
+      feeding: "Small feeders daily or every other day; nectar mix several times weekly",
+      watering: "Mist twice daily and refresh water ledges daily",
+      cleaning: "Spot clean daily; full maintenance every 2–4 weeks",
+    },
+  },
+  {
+    slug: "moorish-gecko",
+    name: "Moorish Gecko",
+    scientificHint: "Tarentola mauritanica",
+    description:
+      "Moorish geckos are hardy Mediterranean geckos that prefer rocky climbing surfaces, moderate humidity, and cooler nights.",
+    image: "/reptiles/geckos/moorish-gecko.svg",
+    imageAlt: "Moorish gecko placeholder",
+    humidity: "45–65%",
+    tempRange: "Basking 88–92°F · Cool side 72–76°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Primarily insectivorous with varied feeder sizes and supplementation.",
+      bullets: [
+        "Crickets, roaches, moths, and occasional larvae",
+        "Calcium dust every feeding for juveniles",
+        "Multivitamin once weekly",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Poor hygiene and inconsistent heat can quickly trigger appetite and shedding issues.",
+      bullets: [
+        "Retained shed on digits",
+        "Nutritional deficiency from feeder monotony",
+        "Respiratory infection in cold damp enclosures",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "Moorish geckos need vertical wall-like structure plus a thermal gradient.",
+      bullets: [
+        "Single adult: 20-gallon tall equivalent minimum",
+        "Rock/cork wall zones with multiple crevice hides",
+        "Secure screened top for airflow",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "Provide a regular photoperiod and modest UVB for long-term bone and immune support.",
+      bullets: [
+        "12-hour light cycle",
+        "Low to moderate UVB strip",
+        "Localized basking area with thermostat control",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Moderate humidity with a damp retreat supports proper sheds.",
+      bullets: [
+        "Ambient 45–65%",
+        "Humid hide available at all times",
+        "Avoid persistently wet floor substrate",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Select low-dust substrate that handles occasional misting and supports cleanup.",
+      bullets: [
+        "Paper, tile, or soil/sand blend for adults",
+        "Leaf litter around hides for moisture retention",
+        "Avoid loose sharp gravel",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Use simple temporary housing during travel, quarantine, or power disruptions.",
+      bullets: [
+        "Ventilated transport box with paper substrate",
+        "Battery backup thermometer/hygrometer monitoring",
+        "Feeder substitution with similarly sized insects",
+      ],
+    },
+    healthRiskSigns: [
+      "Repeated incomplete sheds",
+      "Noticeable weight drop",
+      "Labored breathing or clicking sounds",
+      "Lethargy during normal active periods",
+    ],
+    scheduleDefaults: {
+      feeding: "Juveniles daily; adults every other day with varied insects",
+      watering: "Light mist nightly and change water daily",
+      cleaning: "Spot clean daily; full substrate service every 2–3 weeks",
+    },
+  },
+];
+
+const monitorSpecies: ReptileSpecies[] = [
+  {
+    slug: "nile-monitor",
+    name: "Nile Monitor",
+    scientificHint: "Varanus niloticus",
+    description:
+      "Nile monitors are very large, highly intelligent monitors that require expert-level space, security, and enrichment.",
+    image: "/reptiles/monitors/nile-monitor.svg",
+    imageAlt: "Nile monitor placeholder",
+    humidity: "60–80% with humid retreat",
+    tempRange: "Basking 130–150°F · Ambient 80–90°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Nile monitors need varied whole-prey nutrition and strict portion control to prevent obesity.",
+      bullets: [
+        "Whole prey rodents, fish, chicks, and invertebrates",
+        "Juveniles eat more frequently than adults",
+        "Avoid fatty processed meats and one-item diets",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Nile monitors decline quickly when enclosure size, hydration, or UVB is inadequate.",
+      bullets: [
+        "Obesity and fatty liver disease",
+        "Burn injuries from unguarded heat sources",
+        "Respiratory infections in stagnant humidity",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "Adults need room-scale enclosures with water access and deep substrate.",
+      bullets: [
+        "Custom enclosure often 12×6×8 ft or larger",
+        "Secure lock systems and reinforced barriers",
+        "Deep dig substrate plus climb structures",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "High-output UVB and intense basking heat are mandatory for this species.",
+      bullets: [
+        "T5 HO 10–12% UVB spanning bask and travel paths",
+        "Multiple basking platforms at thermal gradient",
+        "All heat fixtures caged and thermostat monitored",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Maintain humid burrows and water access while preventing foul, stagnant conditions.",
+      bullets: [
+        "Ambient 60–80%",
+        "Humid shelter for resting and shedding",
+        "Frequent water filtration and enclosure drying cycles",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Deep compactable substrate supports digging and moisture layering.",
+      bullets: [
+        "Topsoil/sand/clay mix 18–24+ in deep",
+        "Moist lower layers with drier surface",
+        "Replace soiled zones immediately",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Temporary housing should be treated as emergency-only due to size and strength.",
+      bullets: [
+        "Short quarantine in reinforced stock tanks",
+        "Portable radiant heat panel during outages",
+        "Whole-prey rotation when one feeder source is unavailable",
+      ],
+    },
+    healthRiskSigns: [
+      "Persistent pacing or nose rubbing",
+      "Rapid unexplained weight changes",
+      "Open-mouth breathing or mucus",
+      "Reduced tongue-flicking and responsiveness",
+    ],
+    scheduleDefaults: {
+      feeding: "Juveniles 4–5 times weekly; adults 2–3 times weekly based on body condition",
+      watering: "Refresh large water basin daily and sanitize often",
+      cleaning: "Spot clean daily; deep sanitize high-contact surfaces weekly",
+    },
+  },
+  {
+    slug: "savanna-monitor",
+    name: "Savanna Monitor",
+    scientificHint: "Varanus exanthematicus",
+    description:
+      "Savanna monitors are heavy-bodied burrowers that need deep substrate, extreme basking heat, and strict diet control.",
+    image: "/reptiles/monitors/savanna-monitor.svg",
+    imageAlt: "Savanna monitor placeholder",
+    humidity: "45–65% ambient with humid burrows",
+    tempRange: "Basking 125–140°F · Ambient 80–90°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Savannah monitors are largely insect-focused in the wild and should not rely on rodent-heavy feeding.",
+      bullets: [
+        "Large roaches, snails, and invertebrate variety",
+        "Rodents as limited supplement, not staple",
+        "Calcium support for juveniles",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Improper feeding and low enclosure quality often cause chronic metabolic illness.",
+      bullets: [
+        "Obesity and fatty liver from overfeeding rodents",
+        "MBD from UVB/calcium mismatch",
+        "Dysecdysis from inadequate humid burrowing zones",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "Savannahs require deep diggable substrate and long floor space.",
+      bullets: [
+        "Adult minimum often 8×4×4 ft",
+        "Substrate depth 12–24 in for burrowing",
+        "Strong basking platform and secure hides",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "Strong UVB and high bask temperatures are essential for digestion and activity.",
+      bullets: [
+        "T5 HO 10–12% UVB over key zones",
+        "Multiple thermometers to verify gradients",
+        "12-hour photoperiod with full darkness at night",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Focus on humid substrate pockets rather than constantly wet air.",
+      bullets: [
+        "Ambient 45–65%",
+        "Humid lower burrow layers",
+        "Prevent crusted dry sheds with moisture checks",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Substrate must hold tunnels and permit natural digging behavior.",
+      bullets: [
+        "Soil/sand/clay blend packed for structure",
+        "Large area of deep substrate, not shallow decorative layer",
+        "Replace compacted soiled sections as needed",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Emergency substitutions should preserve heat gradients and burrow access.",
+      bullets: [
+        "Temporary heavy-duty tub with deep paper bedding",
+        "Invertebrate feeder rotation if staples unavailable",
+        "Portable heat projectors during power interruptions",
+      ],
+    },
+    healthRiskSigns: [
+      "Visible fat pads and inactivity",
+      "Difficulty shedding despite humidity",
+      "Bone softness or limb weakness",
+      "Chronic appetite suppression",
+    ],
+    scheduleDefaults: {
+      feeding: "Juveniles near-daily invertebrate meals; adults 3–4 structured meals weekly",
+      watering: "Large clean water dish daily",
+      cleaning: "Spot clean daily; partial substrate turnover weekly",
+    },
+  },
+  {
+    slug: "asian-water-monitor",
+    name: "Asian Water Monitor",
+    scientificHint: "Varanus salvator",
+    description:
+      "Asian water monitors are giant semi-aquatic lizards that need very large enclosures, swimming access, and controlled humidity.",
+    image: "/reptiles/monitors/asian-water-monitor.svg",
+    imageAlt: "Asian water monitor placeholder",
+    humidity: "65–85%",
+    tempRange: "Basking 120–135°F · Ambient 80–88°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Balanced whole-prey variety is crucial for growth, muscle tone, and organ health.",
+      bullets: [
+        "Fish, rodents, chicks, crustaceans, and invertebrates",
+        "Portion control to prevent obesity",
+        "Juveniles require more frequent smaller meals",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Water quality and heat consistency strongly influence health outcomes.",
+      bullets: [
+        "Skin infections from dirty soak water",
+        "Respiratory infections from cool drafts",
+        "MBD in low-UVB or fast-growth juveniles",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "Provide land and water zones with robust climbing and basking options.",
+      bullets: [
+        "Large custom enclosure with secure swim basin",
+        "Dry basking decks and multiple hides",
+        "Heavy-duty materials that resist claws and humidity",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "Use broad UVB coverage and high-output basking arrays for large-body thermoregulation.",
+      bullets: [
+        "Linear UVB plus auxiliary bright light",
+        "Basking areas maintained at species-appropriate high heat",
+        "Thermostat and IR temperature checks daily",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Humidity must remain high without compromising air exchange.",
+      bullets: [
+        "Target 65–85%",
+        "Cross ventilation to limit stagnant air",
+        "Separate wet and dry microclimates",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Use deep moisture-retaining substrate in terrestrial zones.",
+      bullets: [
+        "Soil and sand blend with clay binder",
+        "Deep bedding for digging and nesting behavior",
+        "Frequent replacement in wet, high-traffic areas",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Short-term alternatives should still provide heat, water access, and security.",
+      bullets: [
+        "Reinforced stock tank with bask platform for emergencies",
+        "Filtered kiddie pool only as temporary backup",
+        "Feeder substitutions with species-safe whole prey",
+      ],
+    },
+    healthRiskSigns: [
+      "Skin ulcers or persistent retained shed",
+      "Floating oddly or reduced swim use",
+      "Labored breathing",
+      "Sudden aggression paired with lethargy",
+    ],
+    scheduleDefaults: {
+      feeding: "Juveniles 5–6 small meals weekly; adults 2–4 balanced meals weekly",
+      watering: "Refresh and filter swim water daily",
+      cleaning: "Remove waste daily; sanitize bask and swim zones weekly",
+    },
+  },
+  {
+    slug: "ackie-monitor",
+    name: "Ackie Monitor",
+    scientificHint: "Varanus acanthurus",
+    description:
+      "Ackie monitors are one of the most manageable monitor species, but still require intense heat and deep burrowing substrate.",
+    image: "/reptiles/monitors/ackie-monitor.svg",
+    imageAlt: "Ackie monitor placeholder",
+    humidity: "40–60% ambient with humid burrow core",
+    tempRange: "Basking 130–150°F · Cool side 75–85°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Ackies thrive on varied invertebrates with occasional whole prey items.",
+      bullets: [
+        "Dubia, crickets, locusts, and occasional pinky mice",
+        "Gut-load feeders and dust calcium routinely",
+        "Adjust meal size to maintain lean body condition",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Temperature mistakes and shallow substrate are common husbandry failures.",
+      bullets: [
+        "MBD from poor UVB/supplementation",
+        "Obesity from overfeeding high-fat prey",
+        "Nasal abrasions from enclosure stress",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "Ackies need a strongly heated bask zone and deep dig opportunities.",
+      bullets: [
+        "Adult minimum 4×2×2 ft, larger strongly preferred",
+        "12+ in compacted substrate for burrows",
+        "Rocky bask structures with secure hide chambers",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "High heat and broad UVB support healthy growth and activity.",
+      bullets: [
+        "T5 HO 10–12% UVB",
+        "Very hot basking spot monitored with IR gun",
+        "Stable 12-hour daylight schedule",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Keep ambient moderate while maintaining moister lower substrate layers.",
+      bullets: [
+        "Ambient 40–60%",
+        "Humid burrow chambers below surface",
+        "Avoid constantly wet top layer",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "A packed soil/sand/clay mix is essential for burrow stability.",
+      bullets: [
+        "Deep packed substrate with occasional rehydration",
+        "Stone/shelf layers for thermal zones",
+        "No shallow or loose-only decorative substrate",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "During temporary disruptions, replicate heat and cover first.",
+      bullets: [
+        "Quarantine tote with multiple hides",
+        "Paper substrate during medical treatment",
+        "Invertebrate feeder rotation based on availability",
+      ],
+    },
+    healthRiskSigns: [
+      "Chronic hiding and refusal to bask",
+      "Limb weakness or tremors",
+      "Rapid fat gain at tail base",
+      "No burrowing behavior despite deep substrate",
+    ],
+    scheduleDefaults: {
+      feeding: "Juveniles daily; adults every other day with portion control",
+      watering: "Refresh water daily and lightly moisten burrow zone as needed",
+      cleaning: "Spot clean daily; rebuild and sanitize substrate layers monthly",
+    },
+  },
+];
+
+const chameleonSpecies: ReptileSpecies[] = [
+  {
+    slug: "veiled-chameleon",
+    name: "Veiled Chameleon",
+    scientificHint: "Chamaeleo calyptratus",
+    description:
+      "Veiled chameleons are hardy beginner-friendly chameleons that still require strict hydration, UVB, and vertical living space.",
+    image: "/reptiles/chameleons/veiled-chameleon.svg",
+    imageAlt: "Veiled chameleon placeholder",
+    humidity: "40–70% with daytime dry periods",
+    tempRange: "Basking 88–95°F · Ambient 72–80°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Feed gut-loaded insects with routine calcium and vitamin supplementation.",
+      bullets: [
+        "Crickets, roaches, silkworms, and occasional hornworms",
+        "Calcium most feedings; multivitamin weekly",
+        "Offer safe leafy plants for occasional nibbling",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Hydration errors and UVB deficiencies are the most frequent causes of illness.",
+      bullets: [
+        "MBD and weak grip",
+        "Dehydration with sunken eyes",
+        "Respiratory infections from poor ventilation",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "Screened vertical enclosures with heavy foliage help veileds regulate stress and humidity.",
+      bullets: [
+        "Adult minimum 24×24×48 in screen cage",
+        "Dense plant cover with multiple perch heights",
+        "Dedicated bask and cool retreat pathways",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "Bright UVB and basking light are required daily.",
+      bullets: [
+        "T5 HO UVB 5–6% across top screen",
+        "Separate basking bulb for thermal gradient",
+        "12-hour photoperiod on timer",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Humidity should rise after misting, then fall with strong airflow.",
+      bullets: [
+        "Morning/evening mist peaks",
+        "Daytime dry period to reduce bacterial growth",
+        "Track with elevated digital hygrometer",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Bare-bottom or drainage systems are easiest for hygiene and hydration control.",
+      bullets: [
+        "Bare floor with drainage tray",
+        "Potted plants instead of loose floor substrate",
+        "Paper towel for quarantine",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Temporary options should maintain hydration and perching opportunities.",
+      bullets: [
+        "Manual hand misting during mister failure",
+        "Drip cup system over foliage",
+        "Temporary mesh habitat for transport",
+      ],
+    },
+    healthRiskSigns: [
+      "Sunken or closed eyes",
+      "Persistent dark stress coloration",
+      "Weak tongue projection",
+      "Frequent falls from branches",
+    ],
+    scheduleDefaults: {
+      feeding: "Juveniles daily; adults every other day",
+      watering: "Mist 2–3 times daily and run dripper during lights-on",
+      cleaning: "Remove waste daily; sanitize branches and leaves weekly",
+    },
+  },
+  {
+    slug: "panther-chameleon",
+    name: "Panther Chameleon",
+    scientificHint: "Furcifer pardalis",
+    description:
+      "Panther chameleons need stable hydration cycles, dense planting, and careful thermal control to preserve color and appetite.",
+    image: "/reptiles/chameleons/panther-chameleon.svg",
+    imageAlt: "Panther chameleon placeholder",
+    humidity: "50–75%",
+    tempRange: "Basking 85–92°F · Ambient 72–80°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Panthers benefit from broad feeder variety with strict supplement schedules.",
+      bullets: [
+        "Crickets, roaches, silkworms, and flies",
+        "Calcium at most feedings; multivitamin and D3 on schedule",
+        "Avoid overfeeding adult males",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Hydration and supplementation mistakes often present as eye and grip issues.",
+      bullets: [
+        "Dehydration and kidney strain",
+        "MBD from inconsistent UVB",
+        "Oral and ocular infections in poor airflow",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "Tall screened habitats with thick visual barriers reduce stress responses.",
+      bullets: [
+        "Adult minimum 24×24×48 in screen enclosure",
+        "Layered live plants and branch network",
+        "Separate bask lane and hidden rest zones",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "Panthers require bright daytime illumination and moderate basking temperatures.",
+      bullets: [
+        "Linear UVB 5–6% with replacement schedule",
+        "Basking bulb tuned to mid-80s to low-90s°F",
+        "12-hour consistent day/night timing",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Create hydration peaks without leaving the enclosure continuously damp.",
+      bullets: [
+        "Humidity target 50–75%",
+        "Automatic misting and daytime ventilation",
+        "Overnight cool-down with moderate humidity rise",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Simple, cleanable floors reduce infection and impaction risk.",
+      bullets: [
+        "Bare bottom with runoff control",
+        "Plant pots topped with smooth stones to block ingestion",
+        "Paper towel during observation periods",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Backup hydration and feeder plans prevent rapid decline during equipment outages.",
+      bullets: [
+        "Hand misting if pumps fail",
+        "Drip hydration from elevated container",
+        "Feeder swap to roaches/silkworms if crickets unavailable",
+      ],
+    },
+    healthRiskSigns: [
+      "Eyes closed during daytime",
+      "Loss of grip strength",
+      "No feeding response",
+      "Persistent gaping or wheezing",
+    ],
+    scheduleDefaults: {
+      feeding: "Juveniles daily; adults every 1–2 days",
+      watering: "Mist at least morning and evening; dripper midday",
+      cleaning: "Spot clean daily; deep-clean drainage and foliage weekly",
+    },
+  },
+  {
+    slug: "jacksons-chameleon",
+    name: "Jackson's Chameleon",
+    scientificHint: "Trioceros jacksonii",
+    description:
+      "Jackson's chameleons prefer cooler temperatures, strong airflow, and consistent hydration from misting and drippers.",
+    image: "/reptiles/chameleons/jacksons-chameleon.svg",
+    imageAlt: "Jackson's chameleon placeholder",
+    humidity: "60–80%",
+    tempRange: "Basking 80–85°F · Ambient 68–76°F",
+    diet: {
+      title: "Diet",
+      content:
+        "Offer smaller varied insects with cautious supplementation to match cooler metabolism.",
+      bullets: [
+        "Crickets, flies, roaches, and occasional worms",
+        "Light calcium schedule to avoid oversupplementation",
+        "Gut-load all feeders with quality produce",
+      ],
+    },
+    diseases: {
+      title: "Common Diseases",
+      content:
+        "Jackson's chameleons are sensitive to overheating and poor ventilation.",
+      bullets: [
+        "Heat stress and chronic dehydration",
+        "Respiratory infections in stale air",
+        "MBD from low UVB exposure",
+      ],
+    },
+    habitat: {
+      title: "Habitat Setup (Minimum)",
+      content:
+        "A cool, vertical, heavily planted enclosure is essential for this montane species.",
+      bullets: [
+        "Adult minimum 24×24×48 in screened enclosure",
+        "Dense cool-zone planting with shaded branches",
+        "Ample vertical perches and privacy barriers",
+      ],
+    },
+    lighting: {
+      title: "Lighting Requirements",
+      content:
+        "Use moderate UVB and gentler basking than lowland chameleon species.",
+      bullets: [
+        "UVB 5–6% at safe distance",
+        "Basking kept around low-to-mid 80s°F",
+        "Strict 12-hour day/night cycle",
+      ],
+    },
+    humidityDetail: {
+      title: "Humidity Level",
+      content:
+        "Humidity must stay relatively high while preserving airflow and cooler temperatures.",
+      bullets: [
+        "Target 60–80%",
+        "Frequent fine misting with dry intervals",
+        "Nighttime humidity rise with cool ambient air",
+      ],
+    },
+    substrate: {
+      title: "Substrate Recommendations",
+      content:
+        "Keep floor simple and drainage-focused to reduce bacterial growth.",
+      bullets: [
+        "Bare bottom with runoff management",
+        "Potted plants on raised trays",
+        "Paper substrate during quarantine",
+      ],
+    },
+    substitutes: {
+      title: "Substitutes & Short-Term Options",
+      content:
+        "Backup hydration and cooling plans are critical during equipment failures.",
+      bullets: [
+        "Manual misting plus drip bottle",
+        "Portable fan for airflow in hot weather",
+        "Temporary tall mesh cage for transport",
+      ],
+    },
+    healthRiskSigns: [
+      "Persistent dark coloration and gaping",
+      "Weak branch grip or falls",
+      "Sunken eyes and dry urates",
+      "Loss of appetite beyond normal variation",
+    ],
+    scheduleDefaults: {
+      feeding: "Small varied feeders most days for juveniles, every other day for adults",
+      watering: "Mist 2–4 times daily with daytime dripper support",
+      cleaning: "Spot clean daily; sanitize drainage and branches weekly",
+    },
+  },
+];
 
 export const reptiles: Reptile[] = [
   {
@@ -245,6 +1373,7 @@ export const reptiles: Reptile[] = [
     accent: "#9ad0b1",
     humidity: "40–80% (species dependent)",
     tempRange: "Species specific — see lighting & habitat",
+    species: geckoSpecies,
     diet: {
       title: "Diet",
       content:
@@ -346,6 +1475,7 @@ export const reptiles: Reptile[] = [
     accent: "#d4b483",
     humidity: "40–70% (species dependent)",
     tempRange: "Basking 120–150°F · Ambient 80–90°F",
+    species: monitorSpecies,
     diet: {
       title: "Diet",
       content:
@@ -447,6 +1577,7 @@ export const reptiles: Reptile[] = [
     accent: "#5fbf8a",
     humidity: "50–80% with airflow",
     tempRange: "Basking 85–95°F · Cool 70–75°F",
+    species: chameleonSpecies,
     diet: {
       title: "Diet",
       content:
