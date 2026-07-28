@@ -47,8 +47,7 @@ body::before {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  background-image:
-    url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238fbfa4' stroke-opacity='0.05'%3E%3Cpath d='M0 80c[...]
+  background-image: none;
   opacity: 0.7;
   z-index: 0;
 }
