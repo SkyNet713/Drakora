@@ -79,15 +79,14 @@ export default async function ReptileGuidePage({ params }: Props) {
           <h2 style={{ fontFamily: "var(--font-display)", marginBottom: "1.5rem" }}>Sub-species</h2>
           <div className="species-grid">
             {reptile.species.map((s) => (
-              <div key={s.slug} className="species-tile" style={{ minHeight: "220px" }}>
-                <div style={{ position: "relative", height: "120px", overflow: "hidden", borderBottom: "1px solid var(--line)" }}>
-                  <Image src={s.image} alt={s.imageAlt} fill style={{ objectFit: "cover" }} />
+              <Link key={s.slug} href={`/reptiles/${slug}/${s.slug}`} className="species-tile" style={{ minHeight: "260px" }}>
+                <Image src={`/subspecies/${s.slug}.png`} alt={s.name} fill style={{ objectFit: "cover" }} />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 20%, rgba(5,15,10,0.85) 100%)", zIndex: 1 }} />
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "1rem", zIndex: 2 }}>
+                  <h3 style={{ fontFamily: "var(--font-display)", margin: "0 0 0.25rem", color: "#fff" }}>{s.name}</h3>
+                  <p style={{ margin: 0, color: "#b7dcc6", fontSize: "0.9rem" }}>{s.description}</p>
                 </div>
-                <div style={{ padding: "1rem" }}>
-                  <h3 style={{ fontFamily: "var(--font-display)", margin: "0 0 0.25rem" }}>{s.name}</h3>
-                  <p style={{ margin: 0, color: "var(--mist)", fontSize: "0.85rem", lineHeight: 1.4 }}>{s.description}</p>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
