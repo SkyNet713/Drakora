@@ -74,6 +74,25 @@ export default async function ReptileGuidePage({ params }: Props) {
         </div>
       </section>
 
+      {reptile.species && reptile.species.length > 0 && (
+        <section className="section" style={{ paddingTop: "2rem" }}>
+          <h2 style={{ fontFamily: "var(--font-display)", marginBottom: "1.5rem" }}>Sub-species</h2>
+          <div className="species-grid">
+            {reptile.species.map((s) => (
+              <div key={s.slug} className="species-tile" style={{ minHeight: "220px" }}>
+                <div style={{ position: "relative", height: "120px", overflow: "hidden", borderBottom: "1px solid var(--line)" }}>
+                  <Image src={s.image} alt={s.imageAlt} fill style={{ objectFit: "cover" }} />
+                </div>
+                <div style={{ padding: "1rem" }}>
+                  <h3 style={{ fontFamily: "var(--font-display)", margin: "0 0 0.25rem" }}>{s.name}</h3>
+                  <p style={{ margin: 0, color: "var(--mist)", fontSize: "0.85rem", lineHeight: 1.4 }}>{s.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="section">
         <div className="care-grid">
           {sections.map((section) => (
