@@ -52,7 +52,7 @@ export default async function ReptileGuidePage({ params }: Props) {
         <div className="guide-hero-shade" />
         <div className="guide-hero-copy">
           <p className="eyebrow">{reptile.scientificHint}</p>
-          <h1 className="guide-title">{reptile.name}</h1>
+
           <p className="page-intro" style={{ maxWidth: "40rem" }}>
             {reptile.description}
           </p>
