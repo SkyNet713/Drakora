@@ -63,6 +63,12 @@ export default async function SubSpeciesPage({ params }: Props) {
             <strong style={{ fontSize: "1rem" }}>{s.tempRange}</strong>
           </div>
         </div>
+        <div style={{ borderRadius: "1rem", overflow: "hidden", marginBottom: "2rem", border: `2px solid ${accent}55` }}>
+          <Image src={`/subspecies/habitat-${species}.png`} alt={`${s.name} minimum habitat`} width={800} height={300} style={{ width: "100%", height: "auto", objectFit: "cover" }} />
+          <div style={{ background: `${accent}11`, padding: "0.75rem 1rem", color: "var(--mist)", fontSize: "0.9rem" }}>
+            Minimum habitat setup for {s.name} — {s.habitat.content}
+          </div>
+        </div>
         <div className="care-grid">
           {sections.map((sec) => (
             <article key={sec.title} className="care-panel" style={{ background: `linear-gradient(180deg, ${accent}15, ${accent}08)` }}>
