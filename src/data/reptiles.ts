@@ -61,8 +61,8 @@ const geckoSpecies: ReptileSpecies[] = [
       content:
         "Feed a complete gecko diet (CGD) and occasional insects for enrichment and protein balance.",
       bullets: [
-        "CGD 3–4 nights weekly",
-        "Dubia or crickets 1–2 times weekly",
+        "CGD 3–4 nights weekly: Pangea Fruit Mix Complete or Repashy Crested Gecko Diet",
+        "Live insects: adult male banded crickets, small dubia roaches, calciworms (1–2× weekly)",
         "Calcium dust feeders and remove uneaten insects overnight",
       ],
     },
@@ -245,9 +245,9 @@ const geckoSpecies: ReptileSpecies[] = [
       content:
         "Leopard geckos are insectivores that require gut-loaded feeders and scheduled supplementation.",
       bullets: [
-        "Staple feeders: dubia roaches, crickets, silkworms",
-        "Calcium dust most feedings; multivitamin weekly",
-        "Feed juveniles daily and adults every 2–3 days",
+        "Staple feeders: medium dubia roaches, adult crickets, silkworms, small superworms",
+        "Calcium + D3 dust most feedings; multivitamin with D3 weekly",
+        "Feed juveniles daily; adults every 2–3 days",
       ],
     },
     diseases: {
@@ -337,9 +337,9 @@ const geckoSpecies: ReptileSpecies[] = [
       content:
         "Offer varied insects plus nectar-style mixes to mirror natural feeding behavior.",
       bullets: [
-        "Small insects dusted with calcium",
-        "Commercial gecko nectar 2–3 times weekly",
-        "Fruit puree only as occasional supplement",
+        "Small insects: fruit flies, pinhead crickets, small roaches, micro mealworms dusted with calcium",
+        "Commercial nectar: Pangea Fruit Mix or Repashy Day Gecko Diet 2–3 times weekly",
+        "Fruit puree: mashed mango, fig, or banana only as occasional supplement",
       ],
     },
     diseases: {
@@ -429,9 +429,9 @@ const geckoSpecies: ReptileSpecies[] = [
       content:
         "Primarily insectivorous with varied feeder sizes and supplementation.",
       bullets: [
-        "Crickets, roaches, moths, and occasional larvae",
-        "Calcium dust every feeding for juveniles",
-        "Multivitamin once weekly",
+        "Insects: adult crickets, Turkish roaches, wax moth larvae, occasional mealworms",
+        "Calcium dust with D3 every feeding for juveniles; multivitamin once weekly",
+        "Remove uneaten insects after 30 minutes to prevent bites",
       ],
     },
     diseases: {
@@ -524,9 +524,9 @@ const monitorSpecies: ReptileSpecies[] = [
       content:
         "Nile monitors need varied whole-prey nutrition and strict portion control to prevent obesity.",
       bullets: [
-        "Whole prey rodents, fish, chicks, and invertebrates",
-        "Juveniles eat more frequently than adults",
-        "Avoid fatty processed meats and one-item diets",
+        "Whole prey: frozen-thawed adult rats (200–300g), freshwater tilapia fillets, whole raw quail",
+        "Invertebrates: giant African land snails, large dubia roaches (weekly)",
+        "Avoid fatty ground beef and single-item rodent-only diets",
       ],
     },
     diseases: {
@@ -616,9 +616,9 @@ const monitorSpecies: ReptileSpecies[] = [
       content:
         "Savannah monitors are largely insect-focused in the wild and should not rely on rodent-heavy feeding.",
       bullets: [
-        "Large roaches, snails, and invertebrate variety",
-        "Rodents as limited supplement, not staple",
-        "Calcium support for juveniles",
+        "Invertebrates: large Madagascar hissing roaches, garden snails, superworms (limited)",
+        "Whole prey: small mice or rat pinkies only as occasional supplement",
+        "Calcium + D3 dust every insect feeding for juveniles",
       ],
     },
     diseases: {
@@ -895,9 +895,9 @@ const chameleonSpecies: ReptileSpecies[] = [
       content:
         "Feed gut-loaded insects with routine calcium and vitamin supplementation.",
       bullets: [
-        "Crickets, roaches, silkworms, and occasional hornworms",
-        "Calcium most feedings; multivitamin weekly",
-        "Offer safe leafy plants for occasional nibbling",
+        "Specific insects: adult male banded crickets, orange-headed roaches, small hornworms",
+        "Fruit mix: mashed mango, papaya, and banana puree (occasionally)",
+        "Calcium dust with D3 on every feeding; multivitamin weekly",
       ],
     },
     diseases: {

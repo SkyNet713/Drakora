@@ -19,9 +19,17 @@ export default async function SubSpeciesPage({ params }: Props) {
     s.diet, s.diseases, s.habitat, s.lighting, s.humidityDetail, s.substrate, s.substitutes,
   ];
 
+  const colorMap: Record<string, string> = {
+    "crested-gecko":"#5a8f7b", "gargoyle-gecko":"#8a6e4f", "leopard-gecko":"#c9a45c",
+    "day-gecko":"#4aa56f", "moorish-gecko":"#9d7a5e", "nile-monitor":"#3d8f63",
+    "savanna-monitor":"#c4956a", "asian-water-monitor":"#6aaea8", "ackie-monitor":"#8fbfa4",
+    "veiled-chameleon":"#5fbf8a", "panther-chameleon":"#d4b483", "jacksons-chameleon":"#7ec8a3",
+  };
+  const accent = colorMap[species] || "#8fbfa4";
+
   return (
     <>
-      <section className="guide-hero">
+      <section className="guide-hero" style={{ background: `linear-gradient(135deg, ${accent}22, #06140d 70%)` }}>
         <div className="guide-hero-media">
           <Image src={s.image} alt={s.imageAlt} fill priority sizes="100vw" />
         </div>
