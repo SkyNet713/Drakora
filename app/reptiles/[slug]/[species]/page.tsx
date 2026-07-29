@@ -45,12 +45,12 @@ export default async function SubSpeciesPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" style={{ background: `linear-gradient(180deg, #06140d, ${accent}15)` }}>
         <Link href={`/reptiles/${slug}`} className="btn secondary" style={{ marginBottom: "2rem", display: "inline-block" }}>← Back to {parent.name}</Link>
         <div style={{ borderRadius: "1rem", overflow: "hidden", marginBottom: "2rem", border: "1px solid var(--line)" }}>
           <Image src={`/subspecies/${species}.png`} alt={s.name} width={800} height={300} style={{ width: "100%", height: "auto", objectFit: "cover" }} />
         </div>
-        <div style={{ background: "rgba(16,38,26,0.6)", padding: "1.25rem", borderRadius: "1rem", marginBottom: "2rem", border: "1px solid var(--line)" }}>
+        <div style={{ background: `${accent}18`, padding: "1.25rem", borderRadius: "1rem", marginBottom: "2rem", border: `1px solid ${accent}55` }}>
           <p style={{ color: "var(--mist)", lineHeight: 1.6, margin: 0 }}>{s.description}</p>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem", marginBottom: "2rem" }}>
@@ -65,7 +65,7 @@ export default async function SubSpeciesPage({ params }: Props) {
         </div>
         <div className="care-grid">
           {sections.map((sec) => (
-            <article key={sec.title} className="care-panel">
+            <article key={sec.title} className="care-panel" style={{ background: `linear-gradient(180deg, ${accent}15, ${accent}08)` }}>
               <h2>{sec.title}</h2>
               <p>{sec.content}</p>
               {sec.bullets ? <ul>{sec.bullets.map((b) => <li key={b}>{b}</li>)}</ul> : null}
