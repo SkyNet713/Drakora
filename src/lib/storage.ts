@@ -4,10 +4,13 @@ export type PersonalReptile = {
   speciesSlug: string;
   notes: string;
   age: string;
+  weight: string;
   lastFed: string;
   lastWatered: string;
   feedingSchedule: string;
   wateringSchedule: string;
+  cleaningSchedule: string;
+  substrateSchedule: string;
   createdAt: string;
 };
 
@@ -123,10 +126,13 @@ export function upsertPersonalReptile(
     speciesSlug: reptile.speciesSlug,
     notes: reptile.notes,
     age: reptile.age,
+    weight: (reptile as any).weight || "",
     lastFed: reptile.lastFed,
     lastWatered: reptile.lastWatered,
     feedingSchedule: reptile.feedingSchedule,
     wateringSchedule: reptile.wateringSchedule,
+    cleaningSchedule: (reptile as any).cleaningSchedule || "",
+    substrateSchedule: (reptile as any).substrateSchedule || "",
   };
   user.reptiles.push(created);
   saveUser(user);
@@ -146,3 +152,6 @@ export function updateProfile(displayName: string) {
   user.displayName = displayName;
   saveUser(user);
 }
+
+// Firebase sync removed from top-level module import to prevent server component errors.
+// Will be implemented via a safe client-side only function in the future.

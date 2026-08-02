@@ -52,7 +52,7 @@ const geckoSpecies: ReptileSpecies[] = [
     scientificHint: "Rhacodactylus auriculatus",
     description:
       "Gargoyle geckos are hardy New Caledonian climbers that thrive in tall, planted enclosures with moderate humidity swings.",
-    image: "/reptiles/geckos/gargoyle-gecko.svg",
+    image: "/reptiles/geckos/gargoyle-gecko.png",
     imageAlt: "Gargoyle gecko placeholder",
     humidity: "60–80% with dry daytime period",
     tempRange: "Day 72–78°F · Night 68–72°F",
@@ -144,7 +144,7 @@ const geckoSpecies: ReptileSpecies[] = [
     scientificHint: "Correlophus ciliatus",
     description:
       "Crested geckos are arboreal geckos that rely on stable room temperatures, vertical cover, and routine misting.",
-    image: "/reptiles/geckos/crested-gecko.svg",
+    image: "/reptiles/geckos/crested-gecko.png",
     imageAlt: "Crested gecko placeholder",
     humidity: "55–80% with nightly peak",
     tempRange: "Day 72–78°F · Night 68–72°F",
@@ -236,7 +236,7 @@ const geckoSpecies: ReptileSpecies[] = [
     scientificHint: "Eublepharis macularius",
     description:
       "Leopard geckos are terrestrial geckos that need dry ambient air, a warm hide, and a moist hide for shedding support.",
-    image: "/reptiles/geckos/leopard-gecko.svg",
+    image: "/reptiles/geckos/leopard-gecko.png",
     imageAlt: "Leopard gecko placeholder",
     humidity: "30–40% ambient + humid hide",
     tempRange: "Warm hide 88–92°F · Cool side 72–78°F",
@@ -328,7 +328,7 @@ const geckoSpecies: ReptileSpecies[] = [
     scientificHint: "Phelsuma spp.",
     description:
       "Day geckos are fast, diurnal arboreal geckos that need bright light, UVB, and heavily planted vertical spaces.",
-    image: "/reptiles/geckos/day-gecko.svg",
+    image: "/reptiles/geckos/day-gecko.png",
     imageAlt: "Day gecko placeholder",
     humidity: "60–80% with airflow",
     tempRange: "Basking 88–92°F · Ambient 75–82°F",
@@ -420,7 +420,7 @@ const geckoSpecies: ReptileSpecies[] = [
     scientificHint: "Tarentola mauritanica",
     description:
       "Moorish geckos are hardy Mediterranean geckos that prefer rocky climbing surfaces, moderate humidity, and cooler nights.",
-    image: "/reptiles/geckos/moorish-gecko.svg",
+    image: "/reptiles/geckos/moorish-gecko.png",
     imageAlt: "Moorish gecko placeholder",
     humidity: "45–65%",
     tempRange: "Basking 88–92°F · Cool side 72–76°F",
@@ -515,7 +515,7 @@ const monitorSpecies: ReptileSpecies[] = [
     scientificHint: "Varanus niloticus",
     description:
       "Nile monitors are very large, highly intelligent monitors that require expert-level space, security, and enrichment.",
-    image: "/reptiles/monitors/nile-monitor.svg",
+    image: "/reptiles/monitors/nile-monitor.png",
     imageAlt: "Nile monitor placeholder",
     humidity: "60–80% with humid retreat",
     tempRange: "Basking 130–150°F · Ambient 80–90°F",

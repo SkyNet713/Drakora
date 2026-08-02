@@ -8,6 +8,7 @@ import { getCurrentUser, logoutUser } from "@/lib/storage";
 const links = [
   { href: "/", label: "Home" },
   { href: "/reptiles", label: "Species" },
+  { href: "/about", label: "About" },
   { href: "/dashboard", label: "My Reptiles" },
 ];
 
@@ -35,10 +36,8 @@ export default function Nav() {
     <header className="nav">
       <div className="nav-inner">
         <Link href="/" className="brand">
-          <span className="brand-mark" aria-hidden />
-          <span className="brand-text">
-            Rainforest<span>Reptile</span> Haven
-          </span>
+          <img src="/logo-drakora.png" alt="Drakora logo" className="brand-logo" style={{ width: "2rem", height: "2rem", borderRadius: "0.5rem", objectFit: "cover", boxShadow: "0 0 0 1px rgba(183,220,198,0.25)" }} />
+          <span className="brand-text">Drakora</span>
         </Link>
 
         <button
