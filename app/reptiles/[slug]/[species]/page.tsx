@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getReptile } from "@/data/reptiles";
 import type { ReptileSpecies } from "@/data/reptiles";
+import CopyScheduleButton from "./CopyScheduleButton";
 
 type Props = {
   params: Promise<{ slug: string; species: string }>;
@@ -46,7 +47,7 @@ export default async function SubSpeciesPage({ params }: Props) {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem", marginTop: "2.5rem" }}>
         <div>
           <h2 style={{ fontFamily: "var(--font-display)", marginBottom: "0.75rem" }}>Species Image</h2>
-          <img src={s.image} alt={s.imageAlt} style={{ width: "100%", borderRadius: "0.75rem", border: `2px solid ${accent}`, display: "block" }} />
+          <img src={s.image} alt={s.imageAlt} loading="lazy" width={640} height={420} style={{ width: "100%", borderRadius: "0.75rem", border: `2px solid ${accent}`, display: "block" }} />
         </div>
         <div>
           <h2 style={{ fontFamily: "var(--font-display)", marginBottom: "0.75rem" }}>Habitat Setup</h2>
@@ -121,15 +122,11 @@ export default async function SubSpeciesPage({ params }: Props) {
             <a href={`/dashboard?add=${species}&feeding=${encodeURIComponent(s.scheduleDefaults.feeding)}&watering=${encodeURIComponent(s.scheduleDefaults.watering)}&cleaning=${encodeURIComponent(s.scheduleDefaults.cleaning)}`} className="btn primary small" style={{ textDecoration: "none" }}>
               Add to My Reptiles
             </a>
-            <button type="button" className="btn secondary small" onClick={() => {
-              if (typeof navigator !== "undefined" && navigator.clipboard) {
-                navigator.clipboard.writeText(`Feeding: ${s.scheduleDefaults.feeding}\nWatering: ${s.scheduleDefaults.watering}\nCleaning: ${s.scheduleDefaults.cleaning}`).then(() => alert("Schedule copied — FREE for testing/development"));
-              } else {
-                alert("Copy: " + s.scheduleDefaults.feeding + " | " + s.scheduleDefaults.watering + " | " + s.scheduleDefaults.cleaning);
-              }
-            }}>
-              Copy schedule
-            </button>
+            <CopyScheduleButton
+              feeding={s.scheduleDefaults.feeding}
+              watering={s.scheduleDefaults.watering}
+              cleaning={s.scheduleDefaults.cleaning}
+            />
           </div>
         </article>
       </div>

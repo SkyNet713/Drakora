@@ -323,10 +323,11 @@ button.nav-cta.ghost {
   position: relative;
   overflow: hidden;
   border-radius: 1.1rem;
-  min-height: 280px;
+  min-height: 340px;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
   isolation: isolate;
+  background: linear-gradient(135deg, var(--tile-bg, rgba(42, 48, 32, 0.2)), #120520);
   transition: transform 0.35s ease, border-color 0.35s ease;
 }
 
@@ -335,35 +336,138 @@ button.nav-cta.ghost {
   border-color: rgba(143, 191, 164, 0.4);
 }
 
-.species-tile img {
+.species-tile-link {
+  position: relative;
+  display: block;
+  height: 100%;
+  color: inherit;
+}
+
+.species-tile-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.species-tile-veil {
+.species-tile-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 30%, rgba(5, 15, 10, 0.92) 100%);
+  background: linear-gradient(180deg, transparent 25%, rgba(5, 15, 10, 0.92) 100%);
   z-index: 1;
 }
 
-.species-tile-copy {
+.species-tile-float {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.88;
+  will-change: transform, opacity;
+}
+
+.species-tile-content {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 2;
-  padding: 1.1rem;
+  padding: 1.25rem;
 }
 
-.species-tile-copy h3 {
+.species-tile-content h3 {
   font-family: var(--font-display);
   margin: 0 0 0.25rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
-.species-tile-copy p {
+.species-tile-content p {
   margin: 0;
-  color: var(--mist);
-  font-size: 0.92rem;
+  color: #b7dcc6;
+  font-size: 0.9rem;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.species-tile-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.species-tile-badges span {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.75rem;
+  color: #e8f2ea;
+}
+
+.species-tile-actions {
+  position: relative;
+  z-index: 3;
+  padding: 0 1.25rem 1.25rem;
+}
+
+.species-tile-theme-desert .species-tile-float-a {
+  top: 15%;
+  left: -30px;
+  width: 140px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--tile-bg-solid), transparent 70%);
+  animation: floatDown 8s ease-in-out infinite;
+}
+
+.species-tile-theme-desert .species-tile-float-b {
+  bottom: 20%;
+  right: -20px;
+  width: 100px;
+  height: 80px;
+  border-radius: 40%;
+  background: linear-gradient(45deg, var(--tile-light), transparent);
+  animation: floatUp 7s ease-in-out infinite;
+}
+
+.species-tile-theme-river .species-tile-float-a {
+  top: 10%;
+  left: -20px;
+  width: 160px;
+  height: 50px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--tile-bg-solid), transparent);
+  animation: floatSide 6s ease-in-out infinite;
+}
+
+.species-tile-theme-river .species-tile-float-b {
+  bottom: 25%;
+  right: -30px;
+  width: 120px;
+  height: 50px;
+  border-radius: 999px;
+  background: linear-gradient(-90deg, var(--tile-mid), transparent);
+  animation: floatSide 9s ease-in-out infinite;
+}
+
+.species-tile-theme-forest .species-tile-float-a {
+  top: 20%;
+  left: -40px;
+  width: 120px;
+  height: 140px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, var(--tile-bg-solid), transparent);
+  animation: floatDown 7s ease-in-out infinite;
+}
+
+.species-tile-theme-forest .species-tile-float-b {
+  bottom: 15%;
+  right: -30px;
+  width: 100px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--tile-mid), transparent);
+  animation: floatUp 8s ease-in-out infinite;
 }
 
 /* CAROUSEL */
@@ -1105,6 +1209,18 @@ button.nav-cta.ghost {
 @keyframes pulseGlow {
   0%, 100% { box-shadow: 0 0 8px rgba(183,220,198,0.2); }
   50% { box-shadow: 0 0 20px rgba(183,220,198,0.5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .species-tile-float,
+  .gradient-badge {
+    animation: none !important;
+  }
+
+  .species-tile,
+  .carousel-panel {
+    transition: none !important;
+  }
 }
 
 /* Quick log flash */

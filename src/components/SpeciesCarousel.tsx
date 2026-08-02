@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import type { CSSProperties } from "react";
 import type { Reptile } from "@/data/reptiles";
 
 type Props = {
@@ -11,15 +12,46 @@ type Props = {
 
 export default function SpeciesCarousel({ reptiles }: Props) {
   const [index, setIndex] = useState(0);
+  const [isPageVisible, setIsPageVisible] = useState(true);
 
   useEffect(() => {
-    const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % reptiles.length);
-    }, 5500);
-    return () => window.clearInterval(id);
-  }, [reptiles.length]);
+    if (typeof document === "undefined") return;
 
-  const active = reptiles[index];
+    const syncVisibility = () => {
+      // Pause autoplay while the tab is hidden to avoid unnecessary work.
+      setIsPageVisible(document.visibilityState === "visible");
+    };
+
+    syncVisibility();
+    document.addEventListener("visibilitychange", syncVisibility);
+    return () => document.removeEventListener("visibilitychange", syncVisibility);
+  }, []);
+
+  useEffect(() => {
+    if (reptiles.length <= 1 || !isPageVisible) return;
+
+    const id = window.setInterval(() => {
+      setIndex((current) => (current + 1) % reptiles.length);
+    }, 5500);
+
+    return () => window.clearInterval(id);
+  }, [isPageVisible, reptiles.length]);
+
+  const activeIndex = reptiles.length > 0 ? index % reptiles.length : 0;
+  const active = useMemo(() => reptiles[activeIndex] ?? reptiles[0], [activeIndex, reptiles]);
+  const panelStyles = useMemo(
+    () => reptiles.map((r) => ({ ["--accent" as string]: r.accent }) as CSSProperties),
+    [reptiles]
+  );
+
+  if (reptiles.length === 0 || !active) {
+    return null;
+  }
+
+  const moveIndex = (delta: number) => {
+    if (reptiles.length <= 1) return;
+    setIndex((current) => (current + delta + reptiles.length) % reptiles.length);
+  };
 
   return (
     <section className="carousel-section" aria-label="Featured reptiles">
@@ -33,9 +65,9 @@ export default function SpeciesCarousel({ reptiles }: Props) {
         {reptiles.map((r, i) => (
           <article
             key={r.slug}
-            className={`carousel-panel ${i === index ? "active" : ""}`}
-            style={{ ["--accent" as string]: r.accent }}
-            aria-hidden={i !== index}
+            className={`carousel-panel ${i === activeIndex ? "active" : ""}`}
+            style={panelStyles[i]}
+            aria-hidden={i !== activeIndex}
           >
             <div className="carousel-media">
               <Image
@@ -72,9 +104,7 @@ export default function SpeciesCarousel({ reptiles }: Props) {
           <button
             type="button"
             aria-label="Previous reptile"
-            onClick={() =>
-              setIndex((i) => (i - 1 + reptiles.length) % reptiles.length)
-            }
+            onClick={() => moveIndex(-1)}
           >
             ‹
           </button>
@@ -84,7 +114,7 @@ export default function SpeciesCarousel({ reptiles }: Props) {
                 key={r.slug}
                 type="button"
                 aria-label={`Show ${r.name}`}
-                className={i === index ? "on" : ""}
+                className={i === activeIndex ? "on" : ""}
                 onClick={() => setIndex(i)}
               />
             ))}
@@ -92,7 +122,7 @@ export default function SpeciesCarousel({ reptiles }: Props) {
           <button
             type="button"
             aria-label="Next reptile"
-            onClick={() => setIndex((i) => (i + 1) % reptiles.length)}
+            onClick={() => moveIndex(1)}
           >
             ›
           </button>

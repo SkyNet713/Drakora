@@ -23,9 +23,21 @@ export type UserProfile = {
 
 const USER_KEY = "rh_user";
 const SESSION_KEY = "rh_session";
+let cachedUser: UserProfile | null = null;
 
 function canUseStorage() {
   return typeof window !== "undefined";
+}
+
+function readStoredUser(): UserProfile | null {
+  if (!canUseStorage()) return null;
+  const raw = localStorage.getItem(USER_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as UserProfile;
+  } catch {
+    return null;
+  }
 }
 
 export function registerUser(
@@ -34,9 +46,8 @@ export function registerUser(
   password: string
 ): { ok: true } | { ok: false; error: string } {
   if (!canUseStorage()) return { ok: false, error: "Storage unavailable" };
-  const existing = localStorage.getItem(USER_KEY);
-  if (existing) {
-    const parsed = JSON.parse(existing) as UserProfile;
+  const parsed = readStoredUser();
+  if (parsed) {
     if (parsed.email.toLowerCase() === email.toLowerCase()) {
       return { ok: false, error: "An account with this email already exists on this device." };
     }
@@ -49,6 +60,7 @@ export function registerUser(
   };
   localStorage.setItem(USER_KEY, JSON.stringify(user));
   localStorage.setItem(SESSION_KEY, email);
+  cachedUser = user;
   return { ok: true };
 }
 
@@ -57,9 +69,8 @@ export function loginUser(
   password: string
 ): { ok: true } | { ok: false; error: string } {
   if (!canUseStorage()) return { ok: false, error: "Storage unavailable" };
-  const raw = localStorage.getItem(USER_KEY);
-  if (!raw) return { ok: false, error: "No account found. Create one first." };
-  const user = JSON.parse(raw) as UserProfile;
+  const user = readStoredUser();
+  if (!user) return { ok: false, error: "No account found. Create one first." };
   if (
     user.email.toLowerCase() !== email.toLowerCase() ||
     user.password !== password
@@ -67,12 +78,14 @@ export function loginUser(
     return { ok: false, error: "Incorrect email or password." };
   }
   localStorage.setItem(SESSION_KEY, user.email);
+  cachedUser = user;
   return { ok: true };
 }
 
 export function logoutUser() {
   if (!canUseStorage()) return;
   localStorage.removeItem(SESSION_KEY);
+  cachedUser = null;
 }
 
 export function getSessionEmail(): string | null {
@@ -83,16 +96,21 @@ export function getSessionEmail(): string | null {
 export function getCurrentUser(): UserProfile | null {
   if (!canUseStorage()) return null;
   const email = localStorage.getItem(SESSION_KEY);
-  const raw = localStorage.getItem(USER_KEY);
-  if (!email || !raw) return null;
-  const user = JSON.parse(raw) as UserProfile;
+  if (!email) return null;
+  if (cachedUser && cachedUser.email.toLowerCase() === email.toLowerCase()) {
+    return cachedUser;
+  }
+  const user = readStoredUser();
+  if (!user) return null;
   if (user.email.toLowerCase() !== email.toLowerCase()) return null;
+  cachedUser = user;
   return user;
 }
 
 export function saveUser(user: UserProfile) {
   if (!canUseStorage()) return;
   localStorage.setItem(USER_KEY, JSON.stringify(user));
+  cachedUser = user;
 }
 
 export function upsertPersonalReptile(
