@@ -76,7 +76,7 @@ export default async function ReptileGuidePage({ params }: Props) {
 
       {reptile.species && reptile.species.length > 0 && (
         <section className="section" style={{ paddingTop: "2rem" }}>
-          <h2 style={{ fontFamily: "var(--font-display)", marginBottom: "1.5rem" }}>Sub-species</h2>
+          <h2 style={{ fontFamily: "var(--font-display)", marginBottom: "1.5rem" }}>Species</h2>
           <div className="species-grid">
             {reptile.species.map((s) => {
               const accents: Record<string, string> = {
