@@ -9,8 +9,8 @@ export default function HomePage() {
       <section className="hero">
         <div className="hero-media">
           <Image
-            src="/reptiles/rainforest.jpg"
-            alt="Dense rainforest canopy"
+            src="/hero-drakora.jpg"
+            alt="Drakora — various reptiles in a dark purple mystical forest"
             fill
             priority
             sizes="100vw"
@@ -19,13 +19,11 @@ export default function HomePage() {
         <div className="hero-shade" />
         <div className="hero-content">
           <h1 className="hero-brand">
-            Rainforest
-            <em>Reptile Haven</em>
+            Drakora
+            <em>Reptile Care</em>
           </h1>
           <p className="hero-lead">
-            Species care sheets for bearded dragons, snakes, geckos, monitors,
-            and chameleons — with habitat, lighting, humidity, diet, and a
-            personal schedule for your own reptiles.
+            Species guides for dragons, snakes, geckos, monitors, and chameleons — plus health tracking, schedules, and a personal keeper dashboard.
           </p>
           <div className="hero-actions">
             <Link href="/reptiles" className="btn primary">

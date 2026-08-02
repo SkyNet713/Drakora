@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-inner">
         <div>
-          <p className="footer-brand">Rainforest Reptile Haven</p>
+          <p className="footer-brand">Drakora</p>
           <p className="footer-note">
             Care guides for education — always consult an exotic vet for medical
             concerns.
