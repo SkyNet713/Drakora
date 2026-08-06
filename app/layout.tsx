@@ -14,13 +14,19 @@ const figtree = Figtree({
   subsets: ["latin"],
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   title: {
-    default: "Rainforest Reptile Haven",
-    template: "%s · Rainforest Reptile Haven",
+    default: "Drakora — Reptile Care & Keeper Dashboard",
+    template: "%s · Drakora",
   },
   description:
-    "Dark rainforest reptile care guides for bearded dragons, snakes, geckos, monitor lizards, and chameleons — plus a personal keeper dashboard.",
+    "Drakora — expert reptile care guides, health risk tracking, and a personal keeper dashboard for dragons, snakes, geckos, monitors, and chameleons.",
 };
 
 export default function RootLayout({

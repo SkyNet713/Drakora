@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getReptile } from "@/data/reptiles";
+import ReadPageAloud from "@/components/ReadPageAloud";
 import type { ReptileSpecies } from "@/data/reptiles";
 
 type Props = {
@@ -16,8 +16,8 @@ export default async function SubSpeciesPage({ params }: Props) {
   if (!s) notFound();
 
   const sections = [
-    s.diet, s.diseases, s.habitat, s.lighting, s.humidityDetail, s.substrate, s.substitutes,
-  ];
+    s?.diet, s?.diseases, s?.habitat, s?.lighting, s?.humidityDetail, s?.substrate, s?.substitutes,
+  ].filter(Boolean) as { title: string; content: string; bullets?: string[] }[];
 
   const colorMap: Record<string, string> = {
     "crested-gecko":"#5a8f7b", "gargoyle-gecko":"#8a6e4f", "leopard-gecko":"#c9a45c",
@@ -28,73 +28,109 @@ export default async function SubSpeciesPage({ params }: Props) {
   const accent = colorMap[species] || "#8fbfa4";
 
   return (
-    <>
-      <section className="guide-hero" style={{ background: `linear-gradient(135deg, ${accent}22, #06140d 70%)` }}>
-        <div className="guide-hero-media">
-          <Image src={s.image} alt={s.imageAlt} fill priority sizes="100vw" />
-        </div>
-        <div className="guide-hero-shade" />
-        <div className="guide-hero-copy">
-          <p className="eyebrow">{parent.name} · {s.scientificHint}</p>
-          <h1 className="guide-title">{s.name}</h1>
-          <p className="page-intro">{s.description}</p>
-          <div className="guide-meta">
-            <span className="chip">Humidity {s.humidity}</span>
-            <span className="chip">{s.tempRange}</span>
-          </div>
-        </div>
-      </section>
+    <section className="section" style={{ paddingTop: "2rem" }}>
+      <p style={{ color: "#e6b84a", fontSize: "0.85rem", marginBottom: "0.5rem" }}>🔊 Voice option is at the bottom of this page — look for the "Read page aloud" button.</p>
+      <Link href={`/reptiles/${slug}`} className="btn secondary" style={{ marginBottom: "2rem", display: "inline-block" }}>← Back to {parent.name}</Link>
 
-      <section className="section" style={{ background: `linear-gradient(180deg, #06140d, ${accent}15)` }}>
-        <Link href={`/reptiles/${slug}`} className="btn secondary" style={{ marginBottom: "2rem", display: "inline-block" }}>← Back to {parent.name}</Link>
-        <div style={{ borderRadius: "1rem", overflow: "hidden", marginBottom: "2rem", border: "1px solid var(--line)" }}>
-          <Image src={`/subspecies/${species}.png`} alt={s.name} width={800} height={300} style={{ width: "100%", height: "auto", objectFit: "cover" }} />
+      <div style={{ border: `2px solid ${accent}`, borderRadius: "1rem", padding: "1.5rem", background: `linear-gradient(135deg, ${accent}10, #120520)` }}>
+        <h1 style={{ fontFamily: "var(--font-display)", margin: "0 0 0.5rem", color: "#fff" }}>{s.name}</h1>
+        <p style={{ color: "var(--mist)", fontStyle: "italic", margin: "0 0 1rem" }}>{s.scientificHint}</p>
+        <p style={{ color: "var(--fern)", lineHeight: 1.6 }}>{s.description}</p>
+        <div style={{ display: "flex", gap: "0.75rem", marginTop: "1rem", flexWrap: "wrap" }}>
+          <span style={{ padding: "0.35rem 0.75rem", borderRadius: "999px", border: `1px solid ${accent}`, background: `${accent}15`, color: "#fff", fontSize: "0.85rem" }}>Humidity: {s.humidity}</span>
+          <span style={{ padding: "0.35rem 0.75rem", borderRadius: "999px", border: `1px solid ${accent}`, background: `${accent}15`, color: "#fff", fontSize: "0.85rem" }}>Temp: {s.tempRange}</span>
         </div>
-        <div style={{ background: `${accent}18`, padding: "1.25rem", borderRadius: "1rem", marginBottom: "2rem", border: `1px solid ${accent}55` }}>
-          <p style={{ color: "var(--mist)", lineHeight: 1.6, margin: 0 }}>{s.description}</p>
+        <div style={{ marginTop: "1.25rem" }}>
+          <a href="#" className="btn primary small" style={{ textDecoration: "none", display: "inline-block", marginTop: "0.75rem" }}>+ Add to my profile</a>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem", marginBottom: "2rem" }}>
-          <div className="chip" style={{ textAlign: "center", padding: "1rem" }}>
-            <span style={{ display: "block", fontSize: "0.7rem", color: "var(--amber)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Humidity</span>
-            <strong style={{ fontSize: "1rem" }}>{s.humidity}</strong>
-          </div>
-          <div className="chip" style={{ textAlign: "center", padding: "1rem" }}>
-            <span style={{ display: "block", fontSize: "0.7rem", color: "var(--amber)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Temperature</span>
-            <strong style={{ fontSize: "1rem" }}>{s.tempRange}</strong>
-          </div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem", marginTop: "2.5rem" }}>
+        <div>
+          <h2 style={{ fontFamily: "var(--font-display)", marginBottom: "0.75rem" }}>Species Image</h2>
+          <img src={s.image} alt={s.imageAlt} style={{ width: "100%", borderRadius: "0.75rem", border: `2px solid ${accent}`, display: "block" }} />
         </div>
-        <div style={{ borderRadius: "1rem", overflow: "hidden", marginBottom: "2rem", border: `2px solid ${accent}55` }}>
-          <Image src={`/subspecies/habitat-${species}.png`} alt={`${s.name} minimum habitat`} width={800} height={300} style={{ width: "100%", height: "auto", objectFit: "cover" }} />
-          <div style={{ background: `${accent}11`, padding: "0.75rem 1rem", color: "var(--mist)", fontSize: "0.9rem" }}>
-            Minimum habitat setup for {s.name} — {s.habitat.content}
-          </div>
+        <div>
+          <h2 style={{ fontFamily: "var(--font-display)", marginBottom: "0.75rem" }}>Habitat Setup</h2>
+          <p style={{ color: "var(--mist)", lineHeight: 1.6 }}>{s.habitat.content}</p>
+          <ul style={{ paddingLeft: "1.1rem", color: "var(--cream)", lineHeight: 1.6, marginTop: "0.75rem" }}>
+            {s.habitat.bullets?.map((b) => <li key={b}>{b}</li>)}
+          </ul>
         </div>
-        <div className="care-grid">
-          {sections.map((sec) => (
-            <article key={sec.title} className="care-panel" style={{ background: `linear-gradient(180deg, ${accent}15, ${accent}08)` }}>
-              <h2>{sec.title}</h2>
-              <p>{sec.content}</p>
-              {sec.bullets ? <ul>{sec.bullets.map((b) => <li key={b}>{b}</li>)}</ul> : null}
-            </article>
-          ))}
-          <article className="care-panel">
-            <h2>Health Risk Signs</h2>
-            <div className="risk-list">
-              {s.healthRiskSigns.map((sign) => (
-                <div key={sign} className="risk-item">{sign}</div>
-              ))}
-            </div>
-          </article>
-          <article className="care-panel">
-            <h2>Suggested Care Schedule</h2>
-            <ul>
-              <li><strong>Feeding:</strong> {s.scheduleDefaults.feeding}</li>
-              <li><strong>Watering:</strong> {s.scheduleDefaults.watering}</li>
-              <li><strong>Cleaning:</strong> {s.scheduleDefaults.cleaning}</li>
+      </div>
+
+      <div style={{ marginTop: "2.5rem", border: `2px solid ${accent}`, borderRadius: "1rem", padding: "1.25rem", background: `${accent}08` }}>
+        <h3 style={{ margin: "0 0 1rem", color: "var(--mist)", fontFamily: "var(--font-display)" }}>Enrichment & Setup</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem" }}>
+          <div>
+            <h4 style={{ color: "var(--amber)", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "0.5rem" }}>Live Plants</h4>
+            <ul style={{ paddingLeft: "1.1rem", color: "var(--cream)", fontSize: "0.9rem", lineHeight: 1.5 }}>
+              {species.includes("gecko") ? (
+                <>
+                  <li>Pothos, bromeliads, snake plant, ferns</li>
+                  <li>Live moss (sphagnum) for humidity pockets</li>
+                </>
+              ) : species.includes("monitor") ? (
+                <>
+                  <li>Sturdy grasses, bamboo, spider plant</li>
+                  <li>Deep-rooted plants safe for large lizards</li>
+                </>
+              ) : (
+                <>
+                  <li>Hibiscus, pothos, ficus, dracaena</li>
+                  <li>Dense foliage with strong branches</li>
+                </>
+              )}
             </ul>
-          </article>
+          </div>
+          <div>
+            <h4 style={{ color: "var(--amber)", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "0.5rem" }}>Decor & Brands</h4>
+            <ul style={{ paddingLeft: "1.1rem", color: "var(--cream)", fontSize: "0.9rem", lineHeight: 1.5 }}>
+              <li>Cork rounds & hides (Zoo Med / Exo Terra)</li>
+              <li>Bioactive soil mix (ABG / The Bio Dude)</li>
+              <li>LED grow lights (Arcadia / Jungle Dawn)</li>
+              <li>Thermostats & hygrometers (Inkbird / Govee)</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style={{ color: "var(--amber)", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "0.5rem" }}>Enrichment</h4>
+            <ul style={{ paddingLeft: "1.1rem", color: "var(--cream)", fontSize: "0.9rem", lineHeight: 1.5 }}>
+              <li>Climbing branches, bamboo tubes, rock ledges</li>
+              <li>Dig boxes and burrow tunnels for monitors</li>
+              <li>Live feeding stations and foraging toys</li>
+              <li>Visual barriers and hiding spots</li>
+            </ul>
+          </div>
         </div>
-      </section>
-    </>
+      </div>
+
+      <div className="care-grid" style={{ marginTop: "2.5rem" }}>
+        {sections.map((sec) => (
+          <article key={sec.title} className="care-panel glass-card">
+            <h2>{sec.title}</h2>
+            <img src={sec.title === "Diet" ? "/section-diet-geckos.png" : sec.title === "Common Diseases" || sec.title === "Possible Diseases" ? "/section-diseases-geckos.png" : sec.title === "Habitat Setup (Minimum)" || sec.title.includes("Habitat") ? "/section-habitat-geckos.png" : sec.title === "Lighting Requirements" ? "/section-lighting-geckos.png" : sec.title === "Substrate Recommendations" ? "/section-substrate-geckos.png" : sec.title === "Humidity Level" ? "/section-humidity-geckos.png" : sec.title === "Substitutes & Short-Term Options" ? "/section-substitutes-geckos.png" : "/section-habitat-geckos.png"} alt={sec.title} style={{ width: "100%", maxHeight: "100px", objectFit: "cover", borderRadius: "0.5rem", marginBottom: "0.75rem", border: "1px solid var(--line)", display: "block" }} />
+            <p>{sec.content}</p>
+            {sec.bullets ? <ul>{sec.bullets.map((b) => <li key={b}>{b}</li>)}</ul> : null}
+          </article>
+        ))}
+        <article className="care-panel glass-card">
+          <h2>Health Risk Signs</h2>
+          <div style={{ border: "2px solid #d9785c", borderRadius: "1rem", padding: "1rem", background: "rgba(217,120,92,0.08)" }}><h3 style={{ margin: "0 0 0.75rem", color: "#ffc7b8" }}>Health Risk Signs</h3><div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>{s.healthRiskSigns.map((sign) => <span key={sign} style={{ padding: "0.35rem 0.75rem", borderRadius: "999px", border: "1px solid #d9785c", background: "#d9785c", color: "#fff", fontSize: "0.8rem", fontWeight: 600 }}>{sign}</span>)}</div></div>
+        </article>
+        <article className="care-panel glass-card">
+          <h2>Suggested Care Schedule</h2>
+          <div style={{ border: "2px solid #5fbf8a", borderRadius: "1rem", padding: "1.25rem", background: "rgba(95,191,138,0.08)" }}><h3 style={{ margin: "0 0 1rem", color: "#8fbfa4" }}>Schedule</h3><ul style={{ paddingLeft: "1.1rem", color: "var(--cream)", lineHeight: 1.6 }}><li><strong>Feeding:</strong> {s.scheduleDefaults.feeding}</li><li><strong>Watering:</strong> {s.scheduleDefaults.watering}</li><li><strong>Cleaning:</strong> {s.scheduleDefaults.cleaning}</li></ul></div>
+          <div style={{ marginTop: "1rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+            <a href={`/dashboard?add=${species}&feeding=${encodeURIComponent(s.scheduleDefaults.feeding)}&watering=${encodeURIComponent(s.scheduleDefaults.watering)}&cleaning=${encodeURIComponent(s.scheduleDefaults.cleaning)}`} className="btn primary small" style={{ textDecoration: "none" }}>
+              Add to My Reptiles
+            </a>
+            <button type="button" className="btn secondary small">Copy schedule</button>
+          </div>
+        </article>
+      </div>
+      <div style={{ marginTop: "2rem", textAlign: "center" }}>
+        <ReadPageAloud />
+      </div>
+    </section>
   );
 }

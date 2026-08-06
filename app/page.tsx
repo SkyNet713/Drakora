@@ -1,16 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import SpeciesCarousel from "@/components/SpeciesCarousel";
+import WelcomeVoice from "@/components/WelcomeVoice";
+import ReadPageAloud from "@/components/ReadPageAloud";
 import { reptiles } from "@/data/reptiles";
 
 export default function HomePage() {
   return (
     <>
+      <WelcomeVoice />
       <section className="hero">
         <div className="hero-media">
           <Image
-            src="/reptiles/rainforest.jpg"
-            alt="Dense rainforest canopy"
+            src="/hero-drakora.jpg"
+            alt="Drakora — various reptiles in a dark purple mystical forest"
             fill
             priority
             sizes="100vw"
@@ -19,14 +22,13 @@ export default function HomePage() {
         <div className="hero-shade" />
         <div className="hero-content">
           <h1 className="hero-brand">
-            Rainforest
-            <em>Reptile Haven</em>
+            Drakora
+            <em>Reptile Care</em>
           </h1>
           <p className="hero-lead">
-            Species care sheets for bearded dragons, snakes, geckos, monitors,
-            and chameleons — with habitat, lighting, humidity, diet, and a
-            personal schedule for your own reptiles.
+            Species guides for dragons, snakes, geckos, monitors, and chameleons — plus health tracking, schedules, and a personal keeper dashboard.
           </p>
+          <p style={{ color: "#e6b84a", fontSize: "0.85rem", marginBottom: "0.75rem" }}>🔊 Voice option is at the bottom of this page — look for the "Read page aloud" button.</p>
           <div className="hero-actions">
             <Link href="/reptiles" className="btn primary">
               Browse species
@@ -51,11 +53,11 @@ export default function HomePage() {
           </p>
         </div>
         <div className="species-grid">
-          {reptiles.map((r) => (
+          {reptiles.map((r, i) => (
             <Link
               key={r.slug}
               href={`/reptiles/${r.slug}`}
-              className="species-tile"
+              className={`species-tile stagger-${Math.min(i + 1, 6)}`}
             >
               <Image
                 src={r.image}
@@ -72,6 +74,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      <div style={{ textAlign: "center", marginTop: "2rem", paddingBottom: "2rem" }}>
+        <ReadPageAloud />
+      </div>
     </>
   );
 }
